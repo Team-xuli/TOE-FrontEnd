@@ -1,0 +1,29 @@
+<!--<p>This is the partial for view 1.</p>-->
+
+<div id="login" ng-controller="loginCtrl">
+    <form class="form-horizontal">
+        <div class="title control-group">
+            <label class="control-label" for="inputEmail">Login</label>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Email</label>
+            <div class="controls">
+                <input type="text" id="inputEmail" placeholder="Email" required ng-model="loginInfo.email">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">Password</label>
+            <div class="controls">
+                <input type="password" id="inputPassword" placeholder="Password" required ng-model="loginInfo.password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
+                <button type="button" class="btn btn-success" ng-click="submit(loginInfo)" >Sign in</button>
+            </div>
+        </div>
+    </form>
+</div>
