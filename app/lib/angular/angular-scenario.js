@@ -18862,7 +18862,7 @@ function locationGetterSetter(property, preprocess) {
  */
 function $LocationProvider(){
   var hashPrefix = '',
-      html5Mode = false;
+      html5Mode = true;
 
   /**
    * @ngdoc property

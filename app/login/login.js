@@ -9,7 +9,7 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('loginCtrl', ['$scope',function($scope) {
+.controller('loginCtrl', ['$scope','$location','$window','$http',function($scope,$location,$window,$http) {
       //$scope.loginStep = function(userDetails){
       //  $scope.message = userDetails.email + userDetails.password;
       //
@@ -19,16 +19,26 @@ angular.module('myApp.login', ['ngRoute'])
         var email= loginInfo.email;
         var password = loginInfo.password;
         var loginRequest = $.ajax({
-          url:'192.168.1.4:7777',
+          url:'mockdata/login.json',
+          //headers: {
+          //  'Authorization': 'Basic ' + btoa(email + ':' + password)
+          //},//mockdata/login.json   192.68.1.9:7777/user/passport
           data:{
             email:email,
             password:password
           },
-          type:"post",
-          dataType:"json",
+          dataType:'json',
+          type:'GET',
+          crossDomain:true,
           success:function(data){
-            if(data.msg == "true"){
-              alert("µ«¬Ω≥…π¶£°£°");
+            if(data.status == "success"){
+              //alert("ÁôªÂΩïÊàêÂäüÔºÅÔºÅ");
+              //$location.path('/ticket');
+              //$window.location.href('/ticket');
+              $location.path('/ticket').search('username='+data.username).replace();
+              if(!$scope.$$phase) $scope.$apply()
+              //$location.replace();
+              //$state.go('ticket',{},{reload:true});
             }else{
               alert(data.msg);
             }

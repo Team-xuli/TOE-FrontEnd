@@ -5,11 +5,18 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.login',
   'myApp.register',
+  'myApp.ticket',
   //'myApp.service',
   'myApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/login'});
+  //$stateProvider
+  //    .state('ticket', {
+  //      abstract: true,
+  //      url: "/ticket",
+  //      templateUrl: "ticket/ticket.html",
+  //    })
 }]);
 
 

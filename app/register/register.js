@@ -10,5 +10,5 @@ angular.module('myApp.register', ['ngRoute'])
 }])
 
 .controller('registerCtrl', [function() {
-
+  console.log('1');
 }]);
