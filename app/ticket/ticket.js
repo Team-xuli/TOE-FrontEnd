@@ -9,6 +9,14 @@ angular.module('myApp.ticket', ['ngRoute'])
     });
 }])
 
-.controller('ticketCtrl', [function() {
+.controller('ticketCtrl', ["$scope","$location",function($scope,$location) {
+    $scope.checkHistory = function(){
+        //console.log(1);
+        var username = location.hash.slice(18);
+        $location.path('/ticketHistory').search('username='+username).replace();
 
+    }
+    $scope.submitOrder = function(ticketInfo){
+        console.log(ticketInfo.initialAddress+ticketInfo.aimAddress+ticketInfo.description);
+    }
 }]);

@@ -1,32 +1,33 @@
 <div id="ticket"  ng-controller="ticketCtrl">
-    <span><a href="/tickethistory">订单创建历史信息</a></span>
+    <span><a href="" ng-click="checkHistory()">订单创建历史信息</a></span>
+    <span><a href="#/userInfo">修改个人信息</a></span>
     <div id="">
         <form class="form-horizontal">
             <div class="title control-group">
-                <label class="control-label" for="inputEmail">创建订单</label>
+                <label class="control-label" >创建订单</label>
             </div>
             <div class="control-group">
-                <label class="control-label" for="inputEmail">起始地址</label>
+                <label class="control-label">起始地址</label>
                 <div class="controls">
                     <input type="text" id="initialAddress" placeholder="Email" required ng-model="ticketInfo.initialAddress">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="inputPassword">目的地</label>
+                <label class="control-label">目的地</label>
                 <div class="controls">
                     <input type="password" id="aimAddress" placeholder="Password" required ng-model="ticketInfo.aimAddress">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="inputPassword">描述</label>
+                <label class="control-label">描述</label>
                 <div class="controls">
                     <input type="password" id="description" placeholder="Password" required ng-model="ticketInfo.description">
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="button" class="btn btn-success" ng-click="submit(ticketInfo)" >创建</button>
-                    <button type="button" class="btn btn-success" ng-click="submit(ticketInfo)" >创建</button>
+                    <button type="button" class="btn btn-success" ng-click="submitOrder(ticketInfo)" >创建</button>
+                    <button type="" class="btn btn-warning" >取消</button>
                 </div>
             </div>
         </form>

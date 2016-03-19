@@ -6,6 +6,7 @@ angular.module('myApp', [
   'myApp.login',
   'myApp.register',
   'myApp.ticket',
+  'myApp.ticketHistory',
   //'myApp.service',
   'myApp.version'
 ]).
