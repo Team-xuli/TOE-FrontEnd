@@ -19,10 +19,10 @@ angular.module('myApp.login', ['ngRoute'])
         var username= loginInfo.username;
         var password = loginInfo.password;
         var loginRequest = $http({
-          url:'http://192.168.1.3:7777/user',
+          url:'http://192.168.1.2:7777/user',
           //headers: {
           //  'Authorization': 'Basic ' + btoa(email + ':' + password)
-          //},//mockdata/login.json   192.68.1.9:7777/user/passport
+          //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
           headers: {
             'Authorization': 'Basic ' + btoa(username + ':' + password)
           },
@@ -30,9 +30,11 @@ angular.module('myApp.login', ['ngRoute'])
         })
             .success(function(loginData){
                 console.log(loginData);
-                if(loginData.username === username ){
-                  $location.path('/ticket').search('username='+loginData.username).replace();
-                  if($scope.$$phase) $scope.$apply();
+                if(loginData.username === username && loginData.role===  'ROLE_OWNER'){
+                    $location.path('/ticket').search('username='+loginData.username).replace();
+                    //if($scope.$$phase) $scope.$apply();
+                }else if(loginData.username === username && loginData.role===  'ROLE_DELIVERER'){
+                    $location.path('/ticket').search('username='+loginData.username).replace();
                 }
             })
             .error(function(loginData){

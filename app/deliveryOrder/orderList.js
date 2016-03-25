@@ -1,16 +1,15 @@
 /**
- * Created by Administrator on 2016/3/19.
+ * Created by Administrator on 2016/3/25.
  */
-
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
 angular.module('myApp.ticketHistory', ['ngRoute','ngResource'])
 
     .config(['$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
         $httpProvider.defaults.withCredentials = true;
-        $routeProvider.when('/ticketHistory', {
-            templateUrl: 'ticket/history.html',
-            controller: 'ticketHistoryCtrl'
+        $routeProvider.when('/deliveryOrder', {
+            templateUrl: 'deliverOrder/orderList.html',
+            controller: 'orderListCtrl'
         });
     }])
 

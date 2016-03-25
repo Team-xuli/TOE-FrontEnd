@@ -1,16 +1,16 @@
 [{
     "id":1,
     "destination":"西南八楼",
-    "stratTime":"2016-03-19 12:00:00",
+    "startTime":"2016-03-19 12:00:00",
     "status":"finished"
 },{
     "id":2,
     "destination":"西南九楼",
-    "stratTime":"2016-03-19 12:00:00",
+    "startTime":"2016-03-19 12:00:00",
     "status":"inprocess"
 },{
     "id":3,
     "destination":"西南十楼",
-    "stratTime":"2016-03-19 12:00:00",
+    "startTime":"2016-03-19 12:00:00",
     "status":"unstart"
 }]

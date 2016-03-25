@@ -10,24 +10,29 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>西南八楼</td>
-            <td>2016-03-19 12:00:00</td>
-            <td>待结单</td>
+        <tr ng-repeat="item in history">
+            <td>{{item.id}}</td>
+            <td>{{item.destination}}</td>
+            <td>{{item.startTime}}</td>
+            <td>{{item.status}}</td>
+            <td>
+                <button ng-click="checkOrder(item)" class="btn btn-xs btn-priamry">查看</button>
+                <button ng-click="deleteOrder(item)" ng-show="item.status == 'unstart'" class="btn btn-xs btn-priamry">删除</button>
+
+            </td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>西南十楼</td>
-            <td>2016-03-19 12:00:00</td>
-            <td>运送中</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>西南九楼</td>
-            <td>2016-03-19 12:00:00</td>
-            <td>已完成</td>
-        </tr>
+        <!--<tr>-->
+            <!--<td>2</td>-->
+            <!--<td>西南十楼</td>-->
+            <!--<td>2016-03-19 12:00:00</td>-->
+            <!--<td>运送中</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>3</td>-->
+            <!--<td>西南九楼</td>-->
+            <!--<td>2016-03-19 12:00:00</td>-->
+            <!--<td>已完成</td>-->
+        <!--</tr>-->
         </tbody>
     </table>
 </div>
