@@ -7,6 +7,8 @@ angular.module('myApp', [
   'myApp.register',
   'myApp.ticket',
   'myApp.ticketHistory',
+  'myApp.orderList',
+  'myApp.businessInfo',
   //'myApp.service',
   'myApp.version'
 ]).

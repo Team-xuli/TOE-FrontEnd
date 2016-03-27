@@ -22,13 +22,13 @@ angular.module('myApp.register', ['ngRoute'])
         var password = registerInfo.password;
         var role = registerInfo.currentRole.roleName;
         var loginRequest = $http({
-          url:'http://192.168.1.2:7777/user',
+          url:'http://192.168.1.7:7777/user',
           //headers: {
           //  'Authorization': 'Basic ' + btoa(email + ':' + password)
           //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
-          headers: {
-            'Authorization': 'Basic ' + btoa('admin' + ':' + 'admin')
-          },
+          //headers: {
+          //  'Authorization': 'Basic ' + btoa('admin' + ':' + 'admin')
+          //},
           method:'POST',
           data:{
             "username":username,

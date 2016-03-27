@@ -1,0 +1,31 @@
+<div id="businessInfo" ng-controller="businessInfoCtrl">
+    <form class="form-horizontal">
+        <div class="title control-group">
+            <label class="control-label">修改个人信息</label>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputcalledName">称呼</label>
+            <div class="controls">
+                <input type="text" id="inputcalledName" placeholder="先生/女士" required ng-model="businessInfo.calledName">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPhoneNum">电话/手机</label>
+            <div class="controls">
+                <input type="text" id="inputPhoneNum" placeholder="电话号码" required ng-model="businessInfo.phoneNum">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputAddress">地址</label>
+            <div class="controls">
+                <input type="text" id="inputAddress" placeholder="具体地址" required ng-model="businessInfo.address">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="button" class="btn btn-success" ng-click="changeInfo(businessInfo)" >修改</button>
+                <button type="button" class="btn btn-warning" ng-click="returnMainPage()">取消</button>
+            </div>
+        </div>
+    </form>
+</div>

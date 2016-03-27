@@ -3,23 +3,23 @@
  */
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
-angular.module('myApp.ticketHistory', ['ngRoute','ngResource'])
+angular.module('myApp.orderList', ['ngRoute','ngResource'])
 
     .config(['$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $routeProvider.when('/deliveryOrder', {
-            templateUrl: 'deliverOrder/orderList.html',
+            templateUrl: 'deliveryOrder/orderList.html',
             controller: 'orderListCtrl'
         });
     }])
 
-    .controller('ticketHistoryCtrl', ['$scope','$location','$resource','$http',function($scope,$location,$resource,$http) {
+    .controller('orderListCtrl', ['$scope','$location','$resource','$http',function($scope,$location,$resource,$http) {
         var requestUrl = 'mockdata/ticketHistory.json';
-        $scope.ticketHistoryResource = $resource(requestUrl+'');
+        $scope.orderListResource = $resource(requestUrl+'');
 
-        $scope.historyList = function () {
-            $scope.history = $scope.ticketHistoryResource.query();
+        $scope.orderList = function () {
+            $scope.orders = $scope.orderListResource.query();
         }
 
-        $scope.historyList();
+        $scope.orderList();
     }])

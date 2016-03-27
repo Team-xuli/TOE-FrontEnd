@@ -1,6 +1,6 @@
 <div id="ticket"  ng-controller="ticketCtrl">
     <span><a href="" ng-click="checkHistory()">订单创建历史信息</a></span>
-    <span><a href="#/userInfo">修改个人信息</a></span>
+    <span><a href="" ng-click="changeBusinessInfo()">修改个人信息</a></span>
     <div id="">
         <form class="form-horizontal">
             <div class="title control-group">
@@ -9,7 +9,7 @@
             <div class="control-group">
                 <label class="control-label">起始地址</label>
                 <div class="controls">
-                    <input type="text" id="initialAddress" placeholder="Email" required ng-model="ticketInfo.initialAddress">
+                    <input type="text" id="initialAddress" placeholder="起始地址" required ng-model="ticketInfo.initialAddress">
                 </div>
             </div>
             <div class="control-group">

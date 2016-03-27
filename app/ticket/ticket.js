@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.ticket', ['ngRoute'])
+angular.module('myApp.ticket', ['ngRoute','ngResource'])
 
 .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/ticket', {
@@ -9,14 +9,38 @@ angular.module('myApp.ticket', ['ngRoute'])
     });
 }])
 
-.controller('ticketCtrl', ["$scope","$location",function($scope,$location) {
+.controller('ticketCtrl', ["$scope","$location","$resource",function($scope,$location,$resource) {
+    var requestUrl = 'http://192.168.1.7:7777/user/addresses';
+    $scope.ticketInfo = {
+        initialAddress:''
+    }
+    $scope.addressResource = $resource(requestUrl+'');
+
+    $scope.getAddresses = function () {
+        //$scope.addressResource.query().$promise.then(data){
+        //    console.log(data);
+        //}
+        $scope.addressResource.query().$promise.then(function(addressData){
+            //$scope.ticketInfo.initialAddress = addressData[0].addressDesc;
+            $scope.ticketInfo.initialAddress = addressData[0].addressDesc;
+        });
+    }
+
+    $scope.getAddresses();
+
+    var username = location.hash.slice(18);
     $scope.checkHistory = function(){
-        //console.log(1);
-        var username = location.hash.slice(18);
+        //console.log(1)
         $location.path('/ticketHistory').search('username='+username).replace();
 
     }
+
+    $scope.changeBusinessInfo = function(){
+        $location.path('/businessInfo').search('username='+username).replace();
+    }
+
     $scope.submitOrder = function(ticketInfo){
         console.log(ticketInfo.initialAddress+ticketInfo.aimAddress+ticketInfo.description);
     }
+
 }]);
