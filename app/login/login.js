@@ -11,13 +11,11 @@ angular.module('myApp.login', ['ngRoute'])
         var username= loginInfo.username;
         var password = loginInfo.password;
         var loginRequest = $http({
-          url:urlHeader+'user',
+          url:urlHeader+'signin',
           //headers: {
           //  'Authorization': 'Basic ' + btoa(email + ':' + password)
           //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
-          headers: {
-            'Authorization': 'Basic ' + btoa(username + ':' + password)
-          },
+          Authorization: 'Basic ' + btoa(username + ':' + password),
           method:'GET',
         })
             .success(function(loginData){

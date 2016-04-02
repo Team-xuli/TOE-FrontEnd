@@ -2,7 +2,7 @@
 
 angular.module('myApp.ticket', ['ngRoute','ngResource'])
 .controller('ticketCtrl', ["$scope","$location","$resource","urlHeader",function($scope,$location,$resource,urlHeader) {
-    var requestUrl = urlHeader+'user/addresses';
+    var requestUrl = urlHeader+'order';
     $scope.ticketInfo = {
         initialAddress:''
     }

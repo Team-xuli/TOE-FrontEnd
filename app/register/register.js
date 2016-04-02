@@ -14,7 +14,7 @@ angular.module('myApp.register', ['ngRoute'])
         var password = registerInfo.password;
         var role = registerInfo.currentRole.roleName;
         var loginRequest = $http({
-          url:urlHeader+'user',
+          url:urlHeader+'signup',
           //headers: {
           //  'Authorization': 'Basic ' + btoa(email + ':' + password)
           //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello

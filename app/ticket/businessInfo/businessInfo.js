@@ -24,7 +24,7 @@ angular.module('myApp.businessInfo', ['ngRoute','ngResource'])
         var phoneNum = businessInfo.phoneNum;
         var address = businessInfo.address;
         var loginRequest = $http({
-            url:'http://192.168.1.7:7777/user/address',
+            url:urlHeader+'user/address',
             //headers: {
             //  'Authorization': 'Basic ' + btoa(email + ':' + password)
             //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
