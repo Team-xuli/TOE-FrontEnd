@@ -14,7 +14,7 @@ angular.module('myApp.ticketHistory', ['ngRoute','ngResource'])
         });
     }])
 
-    .controller('ticketHistoryCtrl', ['$scope','$location','$resource','$http',function($scope,$location,$resource,$http) {
+    .controller('ticketHistoryCtrl', ['$scope','$location','$resource','$http','urlHeader',function($scope,$location,$resource,$http,urlHeader) {
         var requestUrl = 'mockdata/ticketHistory.json';
         $scope.ticketHistoryResource = $resource(requestUrl+'');
 

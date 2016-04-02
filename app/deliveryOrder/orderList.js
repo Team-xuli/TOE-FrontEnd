@@ -13,7 +13,7 @@ angular.module('myApp.orderList', ['ngRoute','ngResource'])
         });
     }])
 
-    .controller('orderListCtrl', ['$scope','$location','$resource','$http',function($scope,$location,$resource,$http) {
+    .controller('orderListCtrl', ['$scope','$location','$resource','$http','urlHeader',function($scope,$location,$resource,$http,urlHeader) {
         var requestUrl = 'mockdata/ticketHistory.json';
         $scope.orderListResource = $resource(requestUrl+'');
 

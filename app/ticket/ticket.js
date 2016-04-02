@@ -9,8 +9,8 @@ angular.module('myApp.ticket', ['ngRoute','ngResource'])
     });
 }])
 
-.controller('ticketCtrl', ["$scope","$location","$resource",function($scope,$location,$resource) {
-    var requestUrl = 'http://192.168.1.7:7777/user/addresses';
+.controller('ticketCtrl', ["$scope","$location","$resource","urlHeader",function($scope,$location,$resource,urlHeader) {
+    var requestUrl = urlHeader+'user/addresses';
     $scope.ticketInfo = {
         initialAddress:''
     }

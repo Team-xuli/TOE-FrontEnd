@@ -9,7 +9,7 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('loginCtrl', ['$scope','$location','$window','$http',function($scope,$location,$window,$http) {
+.controller('loginCtrl', ['$scope','$location','$window','$http','urlHeader',function($scope,$location,$window,$http,urlHeader) {
       //$scope.loginStep = function(userDetails){
       //  $scope.message = userDetails.email + userDetails.password;
       //
@@ -19,7 +19,7 @@ angular.module('myApp.login', ['ngRoute'])
         var username= loginInfo.username;
         var password = loginInfo.password;
         var loginRequest = $http({
-          url:'http://192.168.1.7:7777/user',
+          url:urlHeader+'user',
           //headers: {
           //  'Authorization': 'Basic ' + btoa(email + ':' + password)
           //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello

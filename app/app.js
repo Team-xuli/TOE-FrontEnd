@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var myApp = angular.module('myApp', [
   'ngRoute',
   'myApp.login',
   'myApp.register',
@@ -21,5 +21,7 @@ config(['$routeProvider', function($routeProvider) {
   //      templateUrl: "ticket/ticket.html",
   //    })
 }]);
+
+myApp.constant('urlHeader','http://localhost:7777/');
 
 

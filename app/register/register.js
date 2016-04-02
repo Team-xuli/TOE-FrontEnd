@@ -9,7 +9,7 @@ angular.module('myApp.register', ['ngRoute'])
   });
 }])
 
-.controller('registerCtrl', ['$scope','$http',function($scope,$http) {
+.controller('registerCtrl', ['$scope','$http','urlHeader',function($scope,$http,urlHeader) {
       $scope.roleList=[
         {
           "roleName":"ROLE_OWNER"
@@ -22,7 +22,7 @@ angular.module('myApp.register', ['ngRoute'])
         var password = registerInfo.password;
         var role = registerInfo.currentRole.roleName;
         var loginRequest = $http({
-          url:'http://192.168.1.7:7777/user',
+          url:urlHeader+'user',
           //headers: {
           //  'Authorization': 'Basic ' + btoa(email + ':' + password)
           //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
