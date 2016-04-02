@@ -11,16 +11,39 @@ var myApp = angular.module('myApp', [
   'myApp.businessInfo',
   //'myApp.service',
   'myApp.version'
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/login'});
-  //$stateProvider
-  //    .state('ticket', {
-  //      abstract: true,
-  //      url: "/ticket",
-  //      templateUrl: "ticket/ticket.html",
-  //    })
-}]);
+]);
+function routeConfig($routeProvider){
+  $routeProvider.
+      when('/', {
+        templateUrl: 'login/login.html',
+        controller: 'loginCtrl'
+      }).
+      when('/login', {
+        templateUrl: 'login/login.html',
+        controller: 'loginCtrl'
+      }).
+      when('/register', {
+        templateUrl: 'register/register.html',
+        controller: 'registerCtrl'
+      }).
+      when('/ticket', {
+        templateUrl: 'ticket/ticket.html',
+        controller: 'ticketCtrl'
+      }).
+      when('/businessInfo', {
+        templateUrl: 'ticket/businessInfo/businessInfo.html',
+        controller: 'businessInfoCtrl'
+      }).
+      when('/deliveryOrder', {
+        templateUrl: 'deliveryOrder/orderList.html',
+        controller: 'orderListCtrl'
+      }).
+      otherwise({
+        redirectTo: '/'
+      });
+};
+
+myApp.config(routeConfig);
 
 myApp.constant('urlHeader','http://localhost:7777/');
 
