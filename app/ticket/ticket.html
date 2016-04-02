@@ -3,8 +3,8 @@
     <span><a href="" ng-click="changeBusinessInfo()">修改个人信息</a></span>
     <div id="">
         <form class="form-horizontal">
-            <div class="title control-group">
-                <label class="control-label" >创建订单</label>
+            <div class="title control-group ">
+                <label class="control-label" ><h3>创建订单</h3></label>
             </div>
             <div class="control-group">
                 <label class="control-label">起始地址</label>
@@ -12,16 +12,31 @@
                     <input type="text" id="initialAddress" placeholder="起始地址" required ng-model="ticketInfo.initialAddress">
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label">目的地</label>
+            <div class="title control-group">
+                <label class="control-label">目的地:</label>
+            </div>
+            <div class="title control-group">
+                <label class="control-label">称呼:</label>
                 <div class="controls">
-                    <input type="password" id="aimAddress" placeholder="Password" required ng-model="ticketInfo.aimAddress">
+                    <input type="text" id="name" placeholder="先生/女士" required ng-model="ticketInfo.name">
+                </div>
+            </div>
+            <div class="title control-group">
+                <label class="control-label">联系方式:</label>
+                <div class="controls">
+                    <input type="text" id="contact" placeholder="联系方式" required ng-model="ticketInfo.contact">
+                </div>
+            </div>
+            <div class="title control-group">
+                <label class="control-label">目的地址:</label>
+                <div class="controls">
+                    <input type="" id="aimAddress" placeholder="目的地址" required ng-model="ticketInfo.aimAddress">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">描述</label>
                 <div class="controls">
-                    <input type="password" id="description" placeholder="Password" required ng-model="ticketInfo.description">
+                    <input type="password" id="description" placeholder="订单描述"  required ng-model="ticketInfo.description">
                 </div>
             </div>
             <div class="control-group">

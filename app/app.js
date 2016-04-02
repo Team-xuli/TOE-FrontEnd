@@ -22,6 +22,6 @@ config(['$routeProvider', function($routeProvider) {
   //    })
 }]);
 
-myApp.constant('urlHeader','http://localhost:7777/');
+myApp.constant('urlHeader','http://192.168.1.6:7777/');
 
 
