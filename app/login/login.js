@@ -11,15 +11,24 @@ angular.module('myApp.login', ['ngRoute'])
         var username= loginInfo.username;
         var password = loginInfo.password;
         var loginRequest = $http({
-          url:urlHeader+'signin',
-          //headers: {
-          //  'Authorization': 'Basic ' + btoa(email + ':' + password)
-          //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
-          Authorization: 'Basic ' + btoa(username + ':' + password),
+          url:urlHeader+'user',
+          //urlHeader+'signin',
+          //header:{
+          //  'Content-Type':undefined
+          //},
+          //transformRequest: function( ) {
+          //  var formData = new FormData();
+          //  formData.append('username', username);
+          //  formData.append('password',password);
+          //  return formData;
+          //},
+          headers: {
+            'Authorization': 'Basic ' + btoa(username + ':' + password)
+          },//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
           method:'GET',
+          //dataType:'JSON',
         })
             .success(function(loginData){
-                console.log(loginData);
                 if(loginData.username === username && loginData.role===  'ROLE_OWNER'){
                     $location.path('/ticket').search('username='+loginData.username).replace();
                     //if($scope.$$phase) $scope.$apply();

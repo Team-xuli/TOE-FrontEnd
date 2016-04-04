@@ -15,34 +15,83 @@ angular.module('myApp.businessInfo', ['ngRoute','ngResource'])
     //$scope.orderList();
 
     console.log(1);
+    var userAddressInfo
+    var requestUrl = urlHeader+'user/addresses';
+
+    $scope.businessInfo = {
+        addressId:0,
+        addressDesc:'',
+        calledName:'',
+        phoneNo:'',
+        addressExist:false
+    };
+    var addressInfoRequest = $http({
+        url:requestUrl,
+        //urlHeader+'user/addresses',
+        method:'GET',
+    })
+        .success(function(addressData){
+            if(addressData.length > 0){
+                userAddressInfo = addressData[0];
+                $scope.businessInfo.addressId  = userAddressInfo.addressId;
+                $scope.businessInfo.addressDesc  = userAddressInfo.addressDesc;
+                $scope.businessInfo.calledName = userAddressInfo.calledName;
+                $scope.businessInfo.phoneNo = userAddressInfo.phoneNo;
+                $scope.businessInfo.addressExist = true;
+            }
+
+        })
+        .error(function(){
+            alert('内部错误！！！');
+        })
+
     var username = location.hash.slice(18);
+
     $scope.returnMainPage = function(){
         $location.path('/ticket').search('username='+loginData.username).replace();
     }
+
     $scope.changeInfo = function(businessInfo){
-        var calledName= businessInfo.calledName;
-        var phoneNum = businessInfo.phoneNum;
-        var address = businessInfo.address;
-        var loginRequest = $http({
-            url:urlHeader+'user/address',
-            //headers: {
-            //  'Authorization': 'Basic ' + btoa(email + ':' + password)
-            //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
-            //headers: {
-            //    'Authorization': 'Basic ' + btoa('admin' + ':' + 'admin')
-            //},
-            method:'POST',
-            data:{
-                "calledName":username,
-                "phoneNo":phoneNum,
-                "addressDesc":address
-            }
-        })
-            .success(function(loginData){
-                alert('修改成功！！！')
+        var addressId = $scope.businessInfo.addressId;
+        var calledName=$scope.businessInfo.calledName;
+        var phoneNo = $scope.businessInfo.phoneNo;
+        var addressDesc = $scope.businessInfo.addressDesc;
+        if($scope.businessInfo.addressExist === true){
+            var request = $http({
+                url:urlHeader+'user/address',
+                method:'PUT',
+                data:{
+                    "addressId":addressId,
+                    "calledName":calledName,
+                    "phoneNo":phoneNo,
+                    "addressDesc":addressDesc
+                }
             })
-            .error(function(loginData){
-                alert('炸了！！！')
+                .success(function(loginData){
+                    alert('修改成功！！！')
+                })
+                .error(function(loginData){
+                    alert('炸了！！！')
+                })
+        }else{
+            var request = $http({
+                url:urlHeader+'user/address',
+                method:'POST',
+                data:{
+                    "addressId":addressId,
+                    "calledName":calledName,
+                    "phoneNo":phoneNo,
+                    "addressDesc":addressDesc
+                }
             })
+                .success(function(loginData){
+                    alert('新增成功！！！')
+                })
+                .error(function(loginData){
+                    alert('炸了！！！')
+                })
+        }
+
+
     }
 }])
