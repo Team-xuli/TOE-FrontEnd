@@ -15,12 +15,47 @@ angular.module('myApp.ticketHistory', ['ngRoute','ngResource'])
     }])
 
     .controller('ticketHistoryCtrl', ['$scope','$location','$resource','$http','urlHeader',function($scope,$location,$resource,$http,urlHeader) {
-        var requestUrl = 'mockdata/ticketHistory.json';
-        $scope.ticketHistoryResource = $resource(requestUrl+'');
-
-        $scope.historyList = function () {
-            $scope.history = $scope.ticketHistoryResource.query();
+        var history = {};
+        $scope.historyInfo ={
+            description:''
+        };
+        var historyRequest = $http({
+            url:urlHeader+'order/history',
+            data:{
+                pageNo:1,
+                countPerPage:100
+            },
+            method:'POST',
+        })
+            .success(function(historyData){
+                $scope.history = historyData.orders;
+            })
+            .error(function(loginData){
+                alert('炸了！！！');
+            })
+        $scope.checkOrder = function(item){
+            console.log(item);
+            $scope.historyInfo.description =item.description;
         }
 
-        $scope.historyList();
+        $scope.deleteOrder = function (item){
+            var deleteOrderRequest = $http({
+                url:urlHeader+'order/'+item.orderId,
+                //urlHeader+'user/addresses',
+                method:'DELETE',
+            })
+                .success(function(data){
+                    if(data.status === 10){
+                        item.status = data.status;
+                    }
+                })
+        }
+
+        $scope.destination = function(item){
+            return item.destAddress.addressDesc;
+        }
+
+       $scope.startTime = function(item){
+           return item.createTime;
+       }
     }])

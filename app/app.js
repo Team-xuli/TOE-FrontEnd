@@ -45,7 +45,6 @@ function routeConfig($routeProvider){
 
 myApp.config(routeConfig);
 myApp.constant('urlHeader','http://192.168.1.2:7777/');
-
 myApp.controller('indexController',['$scope','$location','userService',function($scope,$location,userService){
     $scope.isUserValid = false;
     $scope.showOwnerMenu = false;
@@ -67,5 +66,6 @@ myApp.controller('indexController',['$scope','$location','userService',function(
         });
     }
 }]);
+
 
 

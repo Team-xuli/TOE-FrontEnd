@@ -13,8 +13,6 @@ angular.module('myApp.businessInfo', ['ngRoute','ngResource'])
     //}
     //
     //$scope.orderList();
-
-    console.log(1);
     var userAddressInfo
     var requestUrl = urlHeader+'user/addresses';
 

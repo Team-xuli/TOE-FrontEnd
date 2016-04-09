@@ -8,7 +8,7 @@ angular.module('myApp.ticket', ['ngRoute','ngResource'])
         initialAddress:''
     };
     var addressRequest = $http({
-        url:urlHeader+'user/addresses',
+        url:urlHeader+'user/addresses/org',
         //urlHeader+'user/addresses',
         method:'GET',
     })
@@ -60,6 +60,7 @@ angular.module('myApp.ticket', ['ngRoute','ngResource'])
                 }else{
                     userAddress = addressData[0];
                     $scope.ticketInfo.initialAddress  = userAddress.addressDesc
+                    alert('创建成功！！！');
                 }
             })
         console.log(ticketInfo.initialAddress+ticketInfo.name+ticketInfo.contact+ticketInfo.aimAddress+ticketInfo.description);
