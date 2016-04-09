@@ -14,18 +14,18 @@
 can make XHR requests for data in an easier way, without having to deal with the lower-level <a href="api/ng.$http"><code>$http</code></a> API, HTTP methods and URLs.</p>
 <p>The most important changes are listed below. You can see the full diff on <a href="https://github.com/angular/angular-phonecat/compare/step-10...step-11">GitHub</a>:</p>
 <h3 id="template">Template</h3>
-<p>The custom service is defined in <code>app/js/services.js</code> so we need to include this file in our layout
+<p>The custom service is defined in <code>app/js/userService.js</code> so we need to include this file in our layout
 template. Additionally, we also need to load the <code>angular-resource.js</code> file, which contains the
 <code>ngResource</code> module and in it the <code>$resource</code> service, that we&#39;ll soon use:</p>
 <p><strong><code>app/index.html</code>.</strong>
 <pre class="prettyprint linenums">
 ...
-  &lt;script src="js/services.js"&gt;&lt;/script&gt;
+  &lt;script src="js/userService.js"&gt;&lt;/script&gt;
   &lt;script src="lib/angular/angular-resource.js"&gt;&lt;/script&gt;
 ...
 </pre>
 <h3 id="service">Service</h3>
-<p><strong><code>app/js/services.js</code>.</strong>
+<p><strong><code>app/js/userService.js</code>.</strong>
 <pre class="prettyprint linenums">
 var phonecatServices = angular.module('phonecatServices', ['ngResource']);
 

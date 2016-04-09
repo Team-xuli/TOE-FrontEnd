@@ -14,27 +14,35 @@
   <link rel="stylesheet" href="app.css">
   <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
 </head>
-<body>
+<body ng-controller="indexController">
 
   <span style="font-family:SimSun;font-size:14px;">
     <div class="wrap">
-      <div class="header">
+      <div class="header" >
         <div class="navbar navbar-inverse navbar-swapper">
           <div class="navbar-inner">
             <div class="container">
               <a class="brand" href="#">速递</a>
 
-              <ul class="menu-guide" >
+              <ul class="menu-login"  ng-show="!isUserValid">
+                <li><a href="#/login">登录</a></li>
+                <li><a href="#/register">注册</a></li>
+              </ul>
+              <ul class="menu-login" ng-show="isUserValid">
+                <li><a href="#/businessInfo">个人信息</a></li>
+                <li><a ng-click="logout()">退出登录</a></li>
+              </ul>
+
+
+              <ul class="menu-guide" ng-show="showOwnerMenu">
                 <li><a href="#/ticket">创建订单</a></li>
                 <li><a href="#/ticketHistory">历史订单</a></li>
               </ul>
 
-              <ul class="menu-login">
-                <li><a href="#/businessInfo">个人信息</a></li>
-                <li><a href="#/login">登录</a></li>
-                <li><a href="#/register">注册</a></li>
-                <li><a href="#/">退出登录</a></li>
+              <ul class="menu-guide" ng-show="showDelivererMenu">
+                <li><a href="#/ticketHistory">历史订单</a></li>
               </ul>
+
             </div>
           </div>
         </div>
@@ -73,6 +81,7 @@
   <script src="register/register.js"></script>
   <script src="ticket/ticket.js"></script>
   <script src="ticket/history.js"></script>
+  <script src="service/userService.js"></script>
   <script src="deliveryOrder/orderList.js"></script>
   <script src="ticket/businessInfo/businessInfo.js"></script>
   <script src="components/version/version.js"></script>

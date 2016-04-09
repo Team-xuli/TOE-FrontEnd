@@ -9,7 +9,7 @@ var myApp = angular.module('myApp', [
   'myApp.ticketHistory',
   'myApp.orderList',
   'myApp.businessInfo',
-  //'myApp.service',
+  'myApp.userService',
   'myApp.version'
 ]);
 function routeConfig($routeProvider){
@@ -44,8 +44,28 @@ function routeConfig($routeProvider){
 };
 
 myApp.config(routeConfig);
+myApp.constant('urlHeader','http://192.168.1.2:7777/');
 
-myApp.constant('urlHeader','http://192.168.1.6:7777/');
-//myApp.constant('userInfo','');
+myApp.controller('indexController',['$scope','$location','userService',function($scope,$location,userService){
+    $scope.isUserValid = false;
+    $scope.showOwnerMenu = false;
+    $scope.showDelivererMenu = false;
+    $scope.$on('event.userChange', function(event) {
+        $scope.onUserChangeHandler();
+    });
+
+    $scope.onUserChangeHandler = function(){
+        $scope.isUserValid = userService.isUserValid();
+        $scope.showOwnerMenu = $scope.isUserValid && userService.isUserAnOwner();
+        $scope.showDelivererMenu = $scope.isUserValid && userService.isUserAnDeliverer();
+    }
+
+    $scope.logout = function(){
+        userService.logout(function(){
+            $location.path('/login').replace();
+            $scope.onUserChangeHandler();
+        });
+    }
+}]);
 
 
