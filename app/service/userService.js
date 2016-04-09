@@ -39,6 +39,18 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         this.user.credit = data.credit;
         this.user.role = data.role;
     };
+    this.tryFetchUserInfo = function(callback){
+        var localThis = this;
+        $http({
+            url: urlHeader + 'user',
+            method: 'GET'
+        }).success(function (data) {
+            localThis.assignUserBasicInfo(data);
+            if (callback) {
+                callback();
+            }
+        });
+    };
     this.fetchUserInfo = function(username,password,callback){
         var localThis = this;
         $http({

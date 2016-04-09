@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="app.css">
   <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
 </head>
-<body ng-controller="indexController">
+<body ng-controller="indexController" onload="onUserChangeHandler()">
 
   <span style="font-family:SimSun;font-size:14px;">
     <div class="wrap">
@@ -40,7 +40,7 @@
               </ul>
 
               <ul class="menu-guide" ng-show="showDelivererMenu">
-                <li><a href="#/deliveryOrder">历史订单</a></li>
+                <li><a href="#/deliveryOrder">附近订单</a></li>
                 <li><a href="#/ticketHistory">历史订单</a></li>
               </ul>
 
