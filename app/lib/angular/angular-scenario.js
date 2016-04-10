@@ -417,7 +417,7 @@ jQuery.extend({
 			return;
 		}
 
-		// Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
+		// Make sure body exists, at least, in case IE gets a little overzealous (order #5443).
 		if ( !document.body ) {
 			return setTimeout( jQuery.ready );
 		}
@@ -922,7 +922,7 @@ jQuery.ready.promise = function( obj ) {
 
 		// Catch cases where $(document).ready() is called after the browser event has already occurred.
 		// we once tried to use readyState "interactive" here, but it caused issues like the one
-		// discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
+		// discovered by ChrisS here: http://bugs.jquery.com/order/12282#comment:15
 		if ( document.readyState === "complete" ) {
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
 			setTimeout( jQuery.ready );
@@ -1587,7 +1587,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// We allow this because of a bug in IE8/9 that throws an error
 	// whenever `document.activeElement` is accessed on an iframe
 	// So, we allow :focus to pass through QSA all the time to avoid the IE error
-	// See http://bugs.jquery.com/ticket/13378
+	// See http://bugs.jquery.com/order/13378
 	rbuggyQSA = [];
 
 	if ( (support.qsa = rnative.test( doc.querySelectorAll )) ) {
@@ -1598,7 +1598,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// This is to test IE's treatment of not explicitly
 			// setting a boolean content attribute,
 			// since its presence should be enough
-			// http://bugs.jquery.com/ticket/12359
+			// http://bugs.jquery.com/order/12359
 			div.innerHTML = "<select><option selected=''></option></select>";
 
 			// Support: IE8
@@ -3504,7 +3504,7 @@ jQuery.support = (function( support ) {
 		div.style.cssText = "box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;padding:1px;border:1px;display:block;width:4px;margin-top:1%;position:absolute;top:1%;";
 
 		// Workaround failing boxSizing test due to offsetWidth returning wrong value
-		// with some non-1 values of body zoom, ticket #13543
+		// with some non-1 values of body zoom, order #13543
 		jQuery.swap( body, body.style.zoom != null ? { zoom: 1 } : {}, function() {
 			support.boxSizing = div.offsetWidth === 4;
 		});
@@ -8001,7 +8001,7 @@ jQuery.extend({
 		// We also use the url parameter if available
 		s.url = ( ( url || s.url || ajaxLocation ) + "" ).replace( rhash, "" ).replace( rprotocol, ajaxLocParts[ 1 ] + "//" );
 
-		// Alias method option to type as per ticket #12004
+		// Alias method option to type as per order #12004
 		s.type = options.method || options.type || s.method || s.type;
 
 		// Extract dataTypes list
@@ -15971,7 +15971,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             controllerInstance = $controller(controller, locals);
             // For directives with element transclusion the element is a comment,
             // but jQuery .data doesn't support attaching data to comment nodes as it's hard to
-            // clean up (http://bugs.jquery.com/ticket/8335).
+            // clean up (http://bugs.jquery.com/order/8335).
             // Instead, we save the controllers for the element in a local hash and attach to .data
             // later, once we have the actual element.
             elementControllers[directive.name] = controllerInstance;
@@ -17795,7 +17795,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
       // fix status code for file protocol (it's always 0)
       status = (protocol == 'file' && status === 0) ? (response ? 200 : 404) : status;
 
-      // normalize IE bug (http://bugs.jquery.com/ticket/1450)
+      // normalize IE bug (http://bugs.jquery.com/order/1450)
       status = status == 1223 ? 204 : status;
 
       callback(status, response, headersString);

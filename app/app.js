@@ -5,12 +5,13 @@ var myApp = angular.module('myApp', [
     'ngRoute',
     'myApp.login',
     'myApp.register',
-    'myApp.ticket',
-    'myApp.ticketHistory',
+    'myApp.order',
+    'myApp.orderHistory',
     'myApp.orderList',
     'myApp.addressInfo',
     'myApp.userService',
     'myApp.addressService',
+    'myApp.orderService',
     'myApp.statusCodeConvertService',
     'myApp.selfInfo',
     'myApp.version'
@@ -29,9 +30,9 @@ function routeConfig($routeProvider){
         templateUrl: 'register/register.html',
         controller: 'registerCtrl'
       }).
-      when('/ticket', {
-        templateUrl: 'ticket/ticket.html',
-        controller: 'ticketCtrl'
+      when('/order', {
+        templateUrl: 'order/order.html',
+        controller: 'orderCtrl'
       }).
       when('/deliveryOrder', {
         templateUrl: 'deliveryOrder/orderList.html',

@@ -6179,7 +6179,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             controllerInstance = $controller(controller, locals);
             // For directives with element transclusion the element is a comment,
             // but jQuery .data doesn't support attaching data to comment nodes as it's hard to
-            // clean up (http://bugs.jquery.com/ticket/8335).
+            // clean up (http://bugs.jquery.com/order/8335).
             // Instead, we save the controllers for the element in a local hash and attach to .data
             // later, once we have the actual element.
             elementControllers[directive.name] = controllerInstance;
@@ -8003,7 +8003,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
       // fix status code for file protocol (it's always 0)
       status = (protocol == 'file' && status === 0) ? (response ? 200 : 404) : status;
 
-      // normalize IE bug (http://bugs.jquery.com/ticket/1450)
+      // normalize IE bug (http://bugs.jquery.com/order/1450)
       status = status == 1223 ? 204 : status;
 
       callback(status, response, headersString);

@@ -4,17 +4,17 @@
 
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
-angular.module('myApp.ticketHistory', ['ngRoute','ngResource'])
+angular.module('myApp.orderHistory', ['ngRoute','ngResource'])
 
     .config(['$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
         $httpProvider.defaults.withCredentials = true;
-        $routeProvider.when('/ticketHistory', {
-            templateUrl: 'ticket/history.html',
-            controller: 'ticketHistoryCtrl'
+        $routeProvider.when('/orderHistory', {
+            templateUrl: 'order/history.html',
+            controller: 'orderHistoryCtrl'
         });
     }])
 
-    .controller('ticketHistoryCtrl', ['$scope','$location','$resource','$http','urlHeader','userService','statusCodeConvertService',function($scope,$location,$resource,$http,urlHeader,userService,statusCodeConvertService) {
+    .controller('orderHistoryCtrl', ['$scope','$location','$resource','$http','urlHeader','userService','statusCodeConvertService',function($scope,$location,$resource,$http,urlHeader,userService,statusCodeConvertService) {
         var history = {};
         //$scope.showCancelBtn = userService.isUserAnOwner();
         $scope.showFinishBtn = userService.isUserAnDeliverer();

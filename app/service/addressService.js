@@ -3,7 +3,7 @@
  */
 'use strict';
 
-/* userService */
+/* addressService */
 
 var services = angular.module('myApp.addressService', ['ngResource']).
     value('version', '1.0');
