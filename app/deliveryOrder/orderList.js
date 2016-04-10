@@ -4,7 +4,7 @@
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
 angular.module('myApp.orderList', ['ngRoute','ngResource'])
-.controller('orderListCtrl', ['$scope','$location','$resource','$http','urlHeader',function($scope,$location,$resource,$http,urlHeader) {
+.controller('orderListCtrl', ['$scope','$location','$resource','$http','urlHeader','statusCodeConvertService',function($scope,$location,$resource,$http,urlHeader,statusCodeConvertService) {
         var orders = {};
         $scope.orderInfo ={
             description:''
@@ -40,8 +40,19 @@ angular.module('myApp.orderList', ['ngRoute','ngResource'])
                     console.log(data);
                 })
         }
+        $scope.status = function(item){
+            return statusCodeConvertService.codeConvert(item.status);
+        }
 
-        $scope.destination = function(item){
+        $scope.initialDestination = function(item){
+            return item.orgAddress.addressDesc;
+        }
+
+        $scope.aimDestination = function(item){
             return item.destAddress.addressDesc;
+        }
+
+        $scope.startTime = function(item){
+            return item.createTime;
         }
 }])
