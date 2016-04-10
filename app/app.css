@@ -85,7 +85,10 @@ html,body {
 .container .credit {
   margin: 10px 0;
 }
-
+.title label {
+  font-size: 2em;
+  font-weight: bold;
+}
 #login .title label {
   font-size: 2em;
   font-weight: bold;

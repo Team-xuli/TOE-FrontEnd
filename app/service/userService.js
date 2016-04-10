@@ -15,9 +15,7 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         password:'',
         money:0,
         credit:0,
-        role:'',
-        orgAddresses:[],
-        destAddresses:[],
+        role:''
     };
 
     this.clear = function(){
@@ -27,9 +25,7 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         this.user.money = 0;
         this.user.credit = 0;
         this.user.role = '';
-        this.orgAddresses = [];
-        this.destAddresses = [];
-    }
+    };
 
     this.assignUserBasicInfo = function(data){
         this.user.userId = data.userId;
@@ -39,19 +35,19 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         this.user.credit = data.credit;
         this.user.role = data.role;
     };
-    this.tryFetchUserInfo = function(callback){
+    this.tryFetchUserInfo = function(successCallback){
         var localThis = this;
         $http({
             url: urlHeader + 'user',
             method: 'GET'
         }).success(function (data) {
             localThis.assignUserBasicInfo(data);
-            if (callback) {
-                callback();
+            if (successCallback) {
+                successCallback();
             }
         });
     };
-    this.fetchUserInfo = function(username,password,callback){
+    this.fetchUserInfo = function(username,password,successCallback){
         var localThis = this;
         $http({
             url: urlHeader + 'user',
@@ -61,51 +57,23 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
             method: 'GET'
         }).success(function (data) {
             localThis.assignUserBasicInfo(data);
-            if (callback) {
-                callback();
+            if (successCallback) {
+                successCallback();
             }
-        }).error(function (loginData) {
-            alert('用户名或密码错误！')
+        }).error(function (data) {
+            alert('用户名或密码错误！' + data.message)
         });
-    };
-    this.fetchOrgAddresses = function(callback){
-        var localThis = this;
-        $http({
-            url:urlHeader + 'addresses/org',
-            method:'GET'
-        }).success(function(data){
-            localThis.user.orgAddresses = data;
-            if (callback) {
-                callback();
-            }
-        }).error(function(loginData){
-            alert('起始地址获取失败！')
-        })
-    };
-    this.fetchDestAddresses = function(callback){
-        var localThis = this;
-        $http({
-            url:urlHeader + 'addresses/dest',
-            method:'GET'
-        }).success(function(data){
-            localThis.user.destAddresses = data;
-            if (callback) {
-                callback();
-            }
-        }).error(function(loginData){
-            alert('目的地址获取失败！')
-        })
     };
 
     this.isUserValid = function(){
        return this.user.userId != 0;
     };
 
-    this.logout = function(callback){
+    this.logout = function(successCallback){
         var localThis = this;
         localThis.clear();
-        if (callback) {
-            callback();
+        if (successCallback) {
+            successCallback();
         }
         //var localThis = this;
         //$http({
@@ -113,17 +81,17 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         //    method:'GET'
         //}).success(function(data){
         //    localThis.clear();
-        //    if (callback) {
-        //        callback();
+        //    if (successCallback) {
+        //        successCallback();
         //    }
         //}).error(function(loginData){
         //    alert('注销失败！')
         //})
-    }
+    };
     this.isUserAnOwner = function(){
         return this.user.role == 'ROLE_OWNER';
-    }
+    };
     this.isUserAnDeliverer = function(){
         return this.user.role == 'ROLE_DELIVERER';
-    }
+    };
 }]);
