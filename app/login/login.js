@@ -12,7 +12,7 @@ angular.module('myApp.login', ['ngRoute','myApp.userService',])
               if (userService.isUserValid()) {
                   $scope.userChangeHandle();
                   if (userService.user.username === username && userService.user.role === 'ROLE_OWNER') {
-                      $location.path('/ticket').search('username=' + userService.user.username).replace();
+                      $location.path('/order').search('username=' + userService.user.username).replace();
                       //if($scope.$$phase) $scope.$apply();
                   } else if (userService.user.username === username && userService.user.role === 'ROLE_DELIVERER') {
                       $location.path('/deliveryOrder').search('username=' + userService.user.username).replace();
