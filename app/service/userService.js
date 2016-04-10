@@ -65,6 +65,21 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         });
     };
 
+    this.changeUserPassword = function(user){
+        var localThis = this;
+        $http({
+            url:urlHeader+'user',
+            headers: {
+                'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
+            },
+            data:user,
+            method:'PUT'
+        }).success(function(data){
+            alert('1');
+        })
+
+    }
+
     this.isUserValid = function(){
        return this.user.userId != 0;
     };
