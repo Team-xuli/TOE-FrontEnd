@@ -2,15 +2,16 @@
 
 // Declare app level module which depends on views, and components
 var myApp = angular.module('myApp', [
-  'ngRoute',
-  'myApp.login',
-  'myApp.register',
-  'myApp.ticket',
-  'myApp.ticketHistory',
-  'myApp.orderList',
-  'myApp.businessInfo',
-  'myApp.userService',
-  'myApp.version'
+    'ngRoute',
+    'myApp.login',
+    'myApp.register',
+    'myApp.ticket',
+    'myApp.ticketHistory',
+    'myApp.orderList',
+    'myApp.addressInfo',
+    'myApp.userService',
+    'myApp.addressService',
+    'myApp.version'
 ]);
 function routeConfig($routeProvider){
   $routeProvider.
@@ -30,13 +31,13 @@ function routeConfig($routeProvider){
         templateUrl: 'ticket/ticket.html',
         controller: 'ticketCtrl'
       }).
-      when('/businessInfo', {
-        templateUrl: 'ticket/businessInfo/businessInfo.html',
-        controller: 'businessInfoCtrl'
-      }).
       when('/deliveryOrder', {
         templateUrl: 'deliveryOrder/orderList.html',
         controller: 'orderListCtrl'
+      }).
+      when('/addressInfo',{
+          templateUrl: 'addressInfo/addressInfo.html',
+          controller: 'addressInfoCtrl'
       }).
       otherwise({
         redirectTo: '/'

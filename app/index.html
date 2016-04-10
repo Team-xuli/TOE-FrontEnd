@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="app.css">
   <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
 </head>
-<body ng-controller="indexController" onload="onUserChangeHandler()">
+<body ng-controller="indexController" >
 
   <span style="font-family:SimSun;font-size:14px;">
     <div class="wrap">
@@ -29,7 +29,7 @@
                 <li><a href="#/register">注册</a></li>
               </ul>
               <ul class="menu-login" ng-show="isUserValid">
-                <li><a href="#/businessInfo">个人信息</a></li>
+                <li><a href="#/addressInfo" ng-show="showOwnerMenu">地址管理</a></li>
                 <li><a ng-click="logout()">退出登录</a></li>
               </ul>
 
@@ -83,8 +83,9 @@
   <script src="ticket/ticket.js"></script>
   <script src="ticket/history.js"></script>
   <script src="service/userService.js"></script>
+  <script src="service/addressService.js"></script>
+  <script src="addressInfo/addressInfo.js"></script>
   <script src="deliveryOrder/orderList.js"></script>
-  <script src="ticket/businessInfo/businessInfo.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
