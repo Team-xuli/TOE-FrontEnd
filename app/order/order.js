@@ -5,6 +5,10 @@ angular.module('myApp.order', ['ngRoute','ngResource'])
     $scope.orgAddresses = null;
     addressService.fetchOrgAddresses(function(){
         $scope.orgAddresses = addressService.orgAddresses;
+        if($scope.orgAddresses.length == 0){
+            alert("请先创建一个起始地址");
+            $location.path("/addressInfo").replace();
+        }
     });
 
     $scope.orderInfo = {

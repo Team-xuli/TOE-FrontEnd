@@ -53,6 +53,8 @@ angular.module('myApp.orderList', ['ngRoute','ngResource'])
         }
 
         $scope.startTime = function(item){
-            return item.createTime;
+            var newDate = new Date();
+            newDate.setTime(item.createTime );
+            return  newDate.toLocaleString();
         }
 }])

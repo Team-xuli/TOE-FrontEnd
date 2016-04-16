@@ -90,8 +90,10 @@ angular.module('myApp.orderHistory', ['ngRoute','ngResource','tm.pagination'])
         }
 
         $scope.startTime = function(item){
-            var createTime=new Date(parseInt(item.createTime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
-            return createTime;
+            //var createTime=new Date(parseInt(item.createTime) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+            var newDate = new Date();
+            newDate.setTime(item.createTime );
+            return  newDate.toLocaleString();
             //var createTime = new Date(parseInt(item.createTime) * 1000).toLocaleString()
            // return createTime;
        }
