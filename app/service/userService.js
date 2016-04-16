@@ -65,14 +65,17 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         });
     };
 
-    this.changeUserPassword = function(user){
+    this.changeUserPassword = function(changInfo){
         var localThis = this;
         $http({
-            url:urlHeader+'user',
-            headers: {
-                'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
+            url:urlHeader+'user/password',
+            //headers: {
+            //    'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
+            //},
+            data:{
+                oldPassword:changInfo.oldPassword,
+                newPassword:changInfo.newPassword
             },
-            data:user,
             method:'PUT'
         }).success(function(data){
             alert('1');

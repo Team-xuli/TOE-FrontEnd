@@ -6,6 +6,7 @@
         <thead>
         <tr>
             <th>订单号</th>
+            <th>起始地址</th>
             <th>目的地址</th>
             <th>订单开始时间</th>
             <th>完成状态</th>
@@ -15,6 +16,7 @@
         <tbody>
         <tr ng-repeat="item in history">
             <td>{{item.orderId}}</td>
+            <td>{{address(item)}}</td>
             <td>{{destination(item)}}</td>
             <td>{{startTime(item)}}</td>
             <td>{{status(item)}}</td>
@@ -26,6 +28,7 @@
         </tr>
         </tbody>
     </table>
+    <tm-pagination conf="paginationConf"></tm-pagination>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -40,7 +43,15 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <p ng-bind= "historyInfo.description"></p>
+                    <div class="control-group">
+                        <span>收货人:<p ng-bind= "historyInfo.destCalledName"></p></span>
+                    </div>
+                    <div class="control-group">
+                        <span>收货人联系方式:<p ng-bind= "historyInfo.destPhoneNo"></p></span>
+                    </div>
+                    <div class="control-group">
+                        <span>订单描述:<p ng-bind= "historyInfo.description"></p></span>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"
@@ -54,3 +65,4 @@
 
 <!-- 模态框（Modal） -->
 <!-- /.modal -->
+

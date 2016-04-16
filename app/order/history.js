@@ -4,7 +4,7 @@
 
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
-angular.module('myApp.orderHistory', ['ngRoute','ngResource'])
+angular.module('myApp.orderHistory', ['ngRoute','ngResource','tm.pagination'])
 
     .config(['$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
         $httpProvider.defaults.withCredentials = true;
@@ -14,30 +14,62 @@ angular.module('myApp.orderHistory', ['ngRoute','ngResource'])
         });
     }])
 
-    .controller('orderHistoryCtrl', ['$scope','$location','$resource','$http','urlHeader','userService','statusCodeConvertService',function($scope,$location,$resource,$http,urlHeader,userService,statusCodeConvertService) {
+    .controller('orderHistoryCtrl', [
+        '$scope',
+        '$location',
+        '$resource',
+        '$http',
+        'urlHeader',
+        'userService',
+        'statusCodeConvertService',
+        'historyService',
+        function($scope,$location,$resource,$http,urlHeader,userService,statusCodeConvertService,historyService) {
         var history = {};
         //$scope.showCancelBtn = userService.isUserAnOwner();
         $scope.showFinishBtn = userService.isUserAnDeliverer();
         $scope.historyInfo ={
             description:''
         };
-        var historyRequest = $http({
-            url:urlHeader+'order/history',
-            data:{
-                pageNo:1,
-                countPerPage:100
-            },
-            method:'POST',
-        })
-            .success(function(historyData){
-                $scope.history = historyData.orders;
-            })
-            .error(function(loginData){
-                alert('炸了！！！');
-            })
+        var GetAllHistory = function () {
+
+            var postData = {
+                pageNo: $scope.paginationConf.currentPage,
+                countPerPage: $scope.paginationConf.itemsPerPage
+            }
+
+            historyService.list(postData).success(function (response) {
+                console.log(response);
+                $scope.paginationConf.totalItems = response.ordersCount;
+                $scope.history = response.orders;
+            });
+
+        }
+
+        //配置分页基本参数
+        $scope.paginationConf = {
+            currentPage: 1,
+            itemsPerPage: 5
+        };
+        $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', GetAllHistory);
+    //var historyRequest = $http({
+        //    url:urlHeader+'order/history',
+        //    data:{
+        //        pageNo:1,
+        //        countPerPage:100
+        //    },
+        //    method:'POST',
+        //})
+        //    .success(function(historyData){
+        //        $scope.history = historyData.orders;
+        //    })
+        //    .error(function(loginData){
+        //        alert('炸了！！！');
+        //    })
         $scope.checkOrder = function(item){
             console.log(item);
             $scope.historyInfo.description =item.description;
+            $scope.historyInfo.destCalledName = item.destAddress.calledName;
+            $scope.historyInfo.destPhoneNo = item.destAddress.phoneNo;
         }
 
         $scope.deleteOrder = function (item){
@@ -78,7 +110,10 @@ angular.module('myApp.orderHistory', ['ngRoute','ngResource'])
 
         $scope.status = function(item){
             return  statusCodeConvertService.codeConvert(item.status);
+        }
 
+        $scope.address =function(item){
+            return item.orgAddress.addressDesc;
         }
 
     }])

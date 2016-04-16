@@ -15,7 +15,7 @@ angular.module('myApp.selfInfo', ['ngRoute'])
         $scope.selfInfo.calledName = userInfo.username;
         $scope.selfInfo.credit = userInfo.credit;
         $scope.selfInfo.money = userInfo.money;
-        $scope.changePassword = function(){
-            userService.changeUserPassword(userInfo);
+        $scope.changePassword = function(changInfo){
+            userService.changeUserPassword(changInfo);
         }
     }]);

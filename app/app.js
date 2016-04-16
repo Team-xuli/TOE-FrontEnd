@@ -14,6 +14,7 @@ var myApp = angular.module('myApp', [
     'myApp.orderService',
     'myApp.statusCodeConvertService',
     'myApp.selfInfo',
+    'myApp.historyService',
     'myApp.version'
 ]);
 function routeConfig($routeProvider){
