@@ -14,88 +14,53 @@ services.service('addressService', ['$http','userService','urlHeader',function (
     this.orgAddresses = [];
     this.destAddresses = [];
 
-    this.deleteAddress = function(data,successCallback, errorCallback){
-        $http({
-            url:urlHeader+'user/address/' + data.addressId,
+    this.deleteAddress = function(address){
+        return $http({
+            url:urlHeader+'user/address/' + address.addressId,
+            headers: userService.authorizationHearder(),
             method:'DELETE'
-        })
-            .success(function(data){
-                if(successCallback){
-                    successCallback();
-                }
-            })
-            .error(function(data){
-                if(errorCallback){
-                    errorCallback();
-                }
-                alert('删除失败！' + data.message)
-            })
+        });
     };
 
-    this.modifyAddress = function(data,successCallback, errorCallback){
-        $http({
+    this.modifyAddress = function(address){
+        return $http({
             url:urlHeader+'user/address',
+            headers: userService.authorizationHearder(),
             method:'PUT',
-            data:data
-        })
-            .success(function(data){
-                if(successCallback){
-                    successCallback();
-                }
-            })
-            .error(function(data){
-                if(errorCallback){
-                    errorCallback();
-                }
-                alert('修改失败！' + data.message)
-            })
+            data:address
+        });
     };
-    this.addAddress = function(data,successCallback, errorCallback){
-        if(this.maxAddressCount > this.orgAddresses.length)
-            $http({
+    this.addAddress = function(address){
+        if(this.maxAddressCount > this.orgAddresses.length){
+            return  $http({
                 url:urlHeader+'user/address',
+                headers: userService.authorizationHearder(),
                 method:'POST',
-                data:data
-            })
-                .success(function(data){
-                    if(successCallback){
-                        successCallback();
-                    }
-                })
-                .error(function(data){
-                    if(errorCallback){
-                        errorCallback();
-                    }
-                    alert('新增失败！' + data.message)
-                })
+                data:address
+            });
+        }else{
+            alert("默认地址最多有"+maxAddressCount+"个！");
+        }
     };
-    this.fetchOrgAddresses = function(successCallback){
+    this.fetchOrgAddresses = function(){
         var localThis = this;
-        $http({
+        return $http({
             url:urlHeader + 'user/addresses/org',
+            headers: userService.authorizationHearder(),
             method:'GET'
-        }).success(function(data){
-            localThis.orgAddresses = data;
-            if (successCallback) {
-                successCallback();
-            }
-        }).error(function(data){
-            alert('源地址获取失败！' + data.message)
-        })
+        }).success(function(res){
+            localThis.orgAddresses = res;
+        });
     };
-    this.fetchDestAddresses = function(successCallback){
+    this.fetchDestAddresses = function(){
         var localThis = this;
-        $http({
+        return $http({
             url:urlHeader + 'user/addresses/dest',
+            headers: userService.authorizationHearder(),
             method:'GET'
-        }).success(function(data){
-            localThis.destAddresses = data;
-            if (successCallback) {
-                successCallback();
-            }
-        }).error(function(data){
-            alert('目的地址获取失败！' + data.message)
-        })
+        }).success(function(res){
+            localThis.destAddresses = res;
+        });
     };
     this.isOrgAddressesFull = function(){
         return this.orgAddresses.length >= this.maxAddressCount;

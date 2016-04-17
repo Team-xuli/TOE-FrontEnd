@@ -30,7 +30,7 @@
                 <li><a href="#/register">注册</a></li>
               </ul>
               <ul class="menu-login" ng-show="isUserValid">
-                <li><a href="#/selfInfo">个人信息</a></li>
+                <li><a href="#/basicInfo">个人信息</a></li>
                 <li><a href="#/addressInfo" ng-show="showOwnerMenu">地址管理</a></li>
                 <li><a ng-click="logout()">退出登录</a></li>
               </ul>
@@ -83,16 +83,15 @@
   <script src="login/login.js"></script>
   <script src="register/register.js"></script>
   <script src="order/order.js"></script>
-  <script src="order/history.js"></script>
-  <script src="addressInfo/addressInfo.js"></script>
+  <script src="order/orderHistory.js"></script>
+  <script src="order/orderNearby.js"></script>
+  <script src="user/addressInfo.js"></script>
+  <script src="user/basicInfo.js"></script>
   <script src="service/userService.js"></script>
   <script src="service/addressService.js"></script>
   <script src="service/orderService.js"></script>
   <script src="service/tm.pagination.js"></script>
   <script src="service/statusCodeConvertService.js"></script>
-  <script src="service/historyService.js"></script>
-  <script src="selfInfo/selfInfo.js"></script>
-  <script src="deliveryOrder/orderList.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

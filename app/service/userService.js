@@ -17,6 +17,11 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         credit:0,
         role:''
     };
+    this.authorizationHearder = function(){
+        return {
+            'Authorization': 'Basic ' + btoa(this.user.username + ':' + this.user.password)
+        }
+    };
 
     this.clear = function(){
         this.user.userId = 0;
@@ -35,67 +40,59 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         this.user.credit = data.credit;
         this.user.role = data.role;
     };
-    this.tryFetchUserInfo = function(successCallback){
-        var localThis = this;
-        $http({
-            url: urlHeader + 'user',
-            method: 'GET'
-        }).success(function (data) {
-            localThis.assignUserBasicInfo(data);
-            if (successCallback) {
-                successCallback();
+    this.register = function(username,password,role){
+        return $http({
+            url:urlHeader+'signup',
+            method:'POST',
+            data:{
+                "username":username,
+                "password":password,
+                "role":role
             }
         });
     };
-    this.fetchUserInfo = function(username,password,successCallback){
+    this.tryFetchUserInfo = function(){
+        return $http({
+            url: urlHeader + 'user',
+            method: 'GET'
+        });
+    };
+    this.fetchUserInfo = function(username,password){
         var localThis = this;
-        $http({
+        return $http({
             url: urlHeader + 'user',
             headers: {
                 'Authorization': 'Basic ' + btoa(username + ':' + password)
             },
             method: 'GET'
-        }).success(function (data) {
-            localThis.assignUserBasicInfo(data);
-            if (successCallback) {
-                successCallback();
-            }
-        }).error(function (data) {
-            alert('用户名或密码错误！' + data.message)
+        }).success(function (res){
+            localThis.assignUserBasicInfo(res);
         });
     };
 
     this.changeUserPassword = function(changInfo){
-        var localThis = this;
-        $http({
+        return $http({
             url:urlHeader+'user/password',
-            //headers: {
-            //    'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
-            //},
+            header:this.authorizationHearder,
             data:{
                 oldPassword:changInfo.oldPassword,
                 newPassword:changInfo.newPassword
             },
             method:'PUT'
-        }).success(function(data){
-            alert('1');
-        })
-
-    }
+        });
+    };
 
     this.isUserValid = function(){
        return this.user.userId != 0;
     };
 
-    this.logout = function(successCallback){
+    this.logout = function(){
         var localThis = this;
         localThis.clear();
-        if (successCallback) {
-            successCallback();
-        }
         //var localThis = this;
         //$http({
         //    url:urlHeader + 'signout',
+        //    header:this.authorizationHearder,
         //    method:'GET'
         //}).success(function(data){
         //    localThis.clear();
@@ -106,10 +103,10 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         //    alert('注销失败！')
         //})
     };
-    this.isUserAnOwner = function(){
+    this.isUserOwner = function(){
         return this.user.role == 'ROLE_OWNER';
     };
-    this.isUserAnDeliverer = function(){
+    this.isUserDeliverer = function(){
         return this.user.role == 'ROLE_DELIVERER';
     };
 }]);

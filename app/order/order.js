@@ -3,13 +3,16 @@
 angular.module('myApp.order', ['ngRoute','ngResource'])
 .controller('orderCtrl', ["$scope","$location","addressService","orderService",function($scope,$location,addressService,orderService) {
     $scope.orgAddresses = null;
-    addressService.fetchOrgAddresses(function(){
-        $scope.orgAddresses = addressService.orgAddresses;
-        if($scope.orgAddresses.length == 0){
-            alert("请先创建一个起始地址");
-            $location.path("/addressInfo").replace();
-        }
-    });
+    addressService.fetchOrgAddresses()
+        .success(function(res){
+            $scope.orgAddresses = addressService.orgAddresses;
+            if($scope.orgAddresses.length == 0){
+                alert("请先创建一个起始地址");
+                $location.path("/addressInfo").replace();
+            }
+        }).error(function(res){
+            alert("获取源地址失败：" + res.message);
+        });
 
     $scope.orderInfo = {
         description:'',
@@ -25,8 +28,11 @@ angular.module('myApp.order', ['ngRoute','ngResource'])
         }
     };
     $scope.addOrder = function(order){
-        orderService.addOrder(order,function(){
-            $location.path('/orderHistory').replace();
-        });
+        orderService.addOrder(order)
+            .success(function(){
+                $location.path('/orderHistory').replace();
+            }).error(function(res){
+                alert("创建失败：" + res.message);
+            });
     }
 }]);

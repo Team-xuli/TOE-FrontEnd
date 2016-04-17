@@ -1,38 +1,34 @@
 'use strict';
 
 angular.module('myApp.register', ['ngRoute'])
-.controller('registerCtrl', ['$scope','$http','urlHeader',function($scope,$http,urlHeader) {
-      $scope.roleList=[
-        {
-          "roleName":"ROLE_OWNER"
-        },{
-          "roleName":"ROLE_DELIVERER"
-        }
-      ];
-      $scope.register = function(registerInfo){
-        var username= registerInfo.username;
-        var password = registerInfo.password;
-        var role = registerInfo.currentRole.roleName;
-        var loginRequest = $http({
-          url:urlHeader+'signup',
-          //headers: {
-          //  'Authorization': 'Basic ' + btoa(email + ':' + password)
-          //},//mockdata/login.json   192.68.1.9:7777/user/passport http://192.168.1.2:7777/hello
-          //headers: {
-          //  'Authorization': 'Basic ' + btoa('admin' + ':' + 'admin')
-          //},
-          method:'POST',
-          data:{
-            "username":username,
-            "password":password,
-            "role":role
-          }
+.controller('registerCtrl', ['$scope','$location','AUTH_EVENTS','userService',function($scope,$location,AUTH_EVENTS,userService) {
+    $scope.roleList=[
+    {
+      "roleName":"ROLE_OWNER"
+    },{
+      "roleName":"ROLE_DELIVERER"
+    }
+    ];
+    $scope.register = function(registerInfo){
+        userService.register(registerInfo.username,registerInfo.password,registerInfo.currentRole.roleName)
+        .success(function(){
+            alert('注册成功！');
+            userService.fetchUserInfo(registerInfo.username, registerInfo.password)
+                .success(function() {
+                    if (userService.isUserValid()) {
+                        if (userService.user.role === 'ROLE_OWNER') {
+                            $location.path('/order').search('username=' + userService.user.username).replace();
+                            //if($scope.$$phase) $scope.$apply();
+                        } else if (userService.user.role === 'ROLE_DELIVERER') {
+                            $location.path('/deliveryOrder').search('username=' + userService.user.username).replace();
+                        }
+                        $scope.$emit(AUTH_EVENTS.loginSuccess);
+                    }
+                }).error(function(res){
+                    alert("登录失败！" + res.message);
+                });
+        }).error(function(res){
+            alert('注册失败：'+ res.message);
         })
-            .success(function(loginData){
-              alert('注册成功！！')
-            })
-            .error(function(loginData){
-              alert('注册失败！！')
-            })
-      }
+    }
 }]);

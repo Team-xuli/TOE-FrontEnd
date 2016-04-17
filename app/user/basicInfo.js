@@ -4,8 +4,8 @@
 
 'useStrict'
 
-angular.module('myApp.selfInfo', ['ngRoute'])
-    .controller('selfInfoCtrl', ['$scope','$http','userService',function($scope,$http,userService) {
+angular.module('myApp.basicInfo', ['ngRoute'])
+    .controller('basicInfoCtrl', ['$scope','$http','userService',function($scope,$http,userService) {
         var userInfo = userService.user;
         $scope.selfInfo = {
             calledName:'',

@@ -1,4 +1,4 @@
-<div id="orderList" ng-controller="orderListCtrl">
+<div id="orderList">
     <div class="title control-group ">
         <label class="control-label" >附近订单</label>
     </div>
@@ -22,12 +22,13 @@
             <td>{{status(item)}}</td>
             <td>
                 <button ng-click="checkOrder(item)" class="btn btn-xs btn-priamry" data-toggle="modal" data-target="#myModal">查看</button>
-                <button ng-click="takeOrder(item)"  class="btn btn-xs btn-priamry">接单</button>
+                <button ng-click="assignOrder(item)"  class="btn btn-xs btn-priamry">接单</button>
 
             </td>
         </tr>
         </tbody>
     </table>
+    <tm-pagination conf="paginationConf"></tm-pagination>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

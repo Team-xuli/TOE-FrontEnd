@@ -1,7 +1,7 @@
 <!--<p>This is the partial for view 1.</p>-->
 
 <div id="login" ng-controller="loginCtrl">
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-submit="login(loginInfo)" novalidate>
         <div class="title control-group">
             <label class="control-label">登录</label>
         </div>
@@ -22,7 +22,7 @@
                 <label class="checkbox">
                     <span><a href="#/register">注册一个新账号</a></span>
                 </label>
-                <button type="button" class="btn btn-success" ng-click="submit(loginInfo)" >登录</button>
+                <button type="submit" class="btn btn-success" >登录</button>
             </div>
         </div>
     </form>

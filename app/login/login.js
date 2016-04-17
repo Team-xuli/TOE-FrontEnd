@@ -1,23 +1,24 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute','myApp.userService',])
-.controller('loginCtrl', ['$scope','$location','userService',function($scope,$location,userService) {
-      $scope.submit = function(loginInfo) {
+angular.module('myApp.login', ['ngRoute','myApp.userService'])
+.controller('loginCtrl', ['$scope','$location','userService','AUTH_EVENTS',function($scope,$location,userService,AUTH_EVENTS) {
+      $scope.login = function(loginInfo) {
           var username = loginInfo.username;
           var password = loginInfo.password;
-          $scope.userChangeHandle = function() {
-              $scope.$emit('event.userChange');
-          }
-          userService.fetchUserInfo(username, password,function(){
-              if (userService.isUserValid()) {
-                  $scope.userChangeHandle();
-                  if (userService.user.username === username && userService.user.role === 'ROLE_OWNER') {
-                      $location.path('/order').search('username=' + userService.user.username).replace();
-                      //if($scope.$$phase) $scope.$apply();
-                  } else if (userService.user.username === username && userService.user.role === 'ROLE_DELIVERER') {
-                      $location.path('/deliveryOrder').search('username=' + userService.user.username).replace();
+
+          userService.fetchUserInfo(username, password)
+              .success(function() {
+                  if (userService.isUserValid()) {
+                      if (userService.user.username === username && userService.user.role === 'ROLE_OWNER') {
+                          $location.path('/order').search('username=' + userService.user.username).replace();
+                          //if($scope.$$phase) $scope.$apply();
+                      } else if (userService.user.username === username && userService.user.role === 'ROLE_DELIVERER') {
+                          $location.path('/deliveryOrder').search('username=' + userService.user.username).replace();
+                      }
+                      $scope.$emit(AUTH_EVENTS.loginSuccess);
                   }
-              }
-          });
-      }
-}])
+              }).error(function(res){
+                      alert("登录失败！" + res.message);
+                  });
+      };
+}]);
