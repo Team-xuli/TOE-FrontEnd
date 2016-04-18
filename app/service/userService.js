@@ -17,12 +17,6 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
         credit:0,
         role:''
     };
-    this.authorizationHearder = function(){
-        return {
-            'Authorization': 'Basic ' + btoa(this.user.username + ':' + this.user.password)
-        }
-    };
-
     this.clear = function(){
         this.user.userId = 0;
         this.user.username = '';
@@ -59,11 +53,9 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
     };
     this.fetchUserInfo = function(username,password){
         var localThis = this;
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa(username + ':' + password);
         return $http({
             url: urlHeader + 'user',
-            headers: {
-                'Authorization': 'Basic ' + btoa(username + ':' + password)
-            },
             method: 'GET'
         }).success(function (res){
             localThis.assignUserBasicInfo(res);
@@ -73,7 +65,6 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
     this.changeUserPassword = function(changInfo){
         return $http({
             url:urlHeader+'user/password',
-            header:this.authorizationHearder,
             data:{
                 oldPassword:changInfo.oldPassword,
                 newPassword:changInfo.newPassword
@@ -87,21 +78,8 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
     };
 
     this.logout = function(){
-        var localThis = this;
-        localThis.clear();
-        //var localThis = this;
-        //$http({
-        //    url:urlHeader + 'signout',
-        //    header:this.authorizationHearder,
-        //    method:'GET'
-        //}).success(function(data){
-        //    localThis.clear();
-        //    if (successCallback) {
-        //        successCallback();
-        //    }
-        //}).error(function(loginData){
-        //    alert('注销失败！')
-        //})
+        $http.defaults.headers.common['Authorization'] = '';
+        this.clear();
     };
     this.isUserOwner = function(){
         return this.user.role == 'ROLE_OWNER';

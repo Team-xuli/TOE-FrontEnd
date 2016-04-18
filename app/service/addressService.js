@@ -8,7 +8,7 @@
 var services = angular.module('myApp.addressService', ['ngResource']).
     value('version', '1.0');
 
-services.service('addressService', ['$http','userService','urlHeader',function ($http,userService,urlHeader){
+services.service('addressService', ['$http','urlHeader',function ($http,urlHeader){
     this.maxAddressCount = 5;
 
     this.orgAddresses = [];
@@ -17,7 +17,6 @@ services.service('addressService', ['$http','userService','urlHeader',function (
     this.deleteAddress = function(address){
         return $http({
             url:urlHeader+'user/address/' + address.addressId,
-            headers: userService.authorizationHearder(),
             method:'DELETE'
         });
     };
@@ -25,7 +24,6 @@ services.service('addressService', ['$http','userService','urlHeader',function (
     this.modifyAddress = function(address){
         return $http({
             url:urlHeader+'user/address',
-            headers: userService.authorizationHearder(),
             method:'PUT',
             data:address
         });
@@ -34,7 +32,6 @@ services.service('addressService', ['$http','userService','urlHeader',function (
         if(this.maxAddressCount > this.orgAddresses.length){
             return  $http({
                 url:urlHeader+'user/address',
-                headers: userService.authorizationHearder(),
                 method:'POST',
                 data:address
             });
@@ -46,7 +43,6 @@ services.service('addressService', ['$http','userService','urlHeader',function (
         var localThis = this;
         return $http({
             url:urlHeader + 'user/addresses/org',
-            headers: userService.authorizationHearder(),
             method:'GET'
         }).success(function(res){
             localThis.orgAddresses = res;
@@ -56,7 +52,6 @@ services.service('addressService', ['$http','userService','urlHeader',function (
         var localThis = this;
         return $http({
             url:urlHeader + 'user/addresses/dest',
-            headers: userService.authorizationHearder(),
             method:'GET'
         }).success(function(res){
             localThis.destAddresses = res;
