@@ -1,51 +1,49 @@
 <div id="order" >
-    <div id="">
-        <form class="form-horizontal">
-            <div class="title control-group ">
-                <label class="control-label" >创建订单</label>
+    <form class="form-horizontal">
+        <div class="title control-group ">
+            <label class="control-label" >创建订单</label>
+        </div>
+        <div class="control-group">
+            <label class="control-label">描述</label>
+            <div class="controls">
+                <input type="text" id="description" placeholder="订单描述"  required ng-model="orderInfo.description">
             </div>
-            <div class="control-group">
-                <label class="control-label">描述</label>
-                <div class="controls">
-                    <input type="text" id="description" placeholder="订单描述"  required ng-model="orderInfo.description">
-                </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">起始地址:</label>
+            <div class="controls">
+                <select id="inputOrgAddress" ng-model="orderInfo.orgAddress" class="form-control"
+                        ng-options="orgAddress.addressDesc+' （'+orgAddress.phoneNo+'）' for orgAddress in orgAddresses">
+                    <option value="">请选择起始地址</option>
+                </select>
             </div>
-            <div class="control-group">
-                <label class="control-label">起始地址:</label>
-                <div class="controls">
-                    <select id="inputOrgAddress" ng-model="orderInfo.orgAddress" class="form-control"
-                            ng-options="orgAddress.addressDesc+' （'+orgAddress.phoneNo+'）' for orgAddress in orgAddresses">
-                        <option value="">请选择起始地址</option>
-                    </select>
-                </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">目的地:</label>
+        </div>
+        <div class="control-group">
+            <label class="control-label">称呼:</label>
+            <div class="controls">
+                <input type="text" id="name" placeholder="先生/女士" required ng-model="orderInfo.destAddress.calledName">
             </div>
-            <div class="control-group">
-                <label class="control-label">目的地:</label>
+        </div>
+        <div class="control-group">
+            <label class="control-label">联系方式:</label>
+            <div class="controls">
+                <input type="text" id="contact" placeholder="联系方式" required ng-model="orderInfo.destAddress.phoneNo">
             </div>
-            <div class="control-group">
-                <label class="control-label">称呼:</label>
-                <div class="controls">
-                    <input type="text" id="name" placeholder="先生/女士" required ng-model="orderInfo.destAddress.calledName">
-                </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">目的地址:</label>
+            <div class="controls">
+                <input type="text" id="aimAddress" placeholder="目的地址" required ng-model="orderInfo.destAddress.addressDesc">
             </div>
-            <div class="control-group">
-                <label class="control-label">联系方式:</label>
-                <div class="controls">
-                    <input type="text" id="contact" placeholder="联系方式" required ng-model="orderInfo.destAddress.phoneNo">
-                </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-success" ng-click="addOrder(orderInfo)" >创建</button>
+                <button class="btn btn-warning" ng-click="clear(orderInfo)">取消</button>
             </div>
-            <div class="control-group">
-                <label class="control-label">目的地址:</label>
-                <div class="controls">
-                    <input type="text" id="aimAddress" placeholder="目的地址" required ng-model="orderInfo.destAddress.addressDesc">
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button class="btn btn-success" ng-click="addOrder(orderInfo)" >创建</button>
-                    <button class="btn btn-warning" ng-click="clear(orderInfo)">取消</button>
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

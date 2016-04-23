@@ -4,17 +4,15 @@
 
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
-angular.module('myApp.orderHistory', ['ngRoute','ngResource','tm.pagination'])
+angular.module('myApp.orderHistory', ['ngRoute','tm.pagination','order.orderDetail'])
 .controller('orderHistoryCtrl', [
     '$scope',
     '$location',
     'userService',
     'statusCodeConvertService',
     'orderService',
-    function($scope,$location,userService,statusCodeConvertService,orderService) {
-    $scope.historyInfo ={
-        description:''
-    };
+    'BASIC_EVENTS',
+    function($scope,$location,userService,statusCodeConvertService,orderService,BASIC_EVENTS) {
     $scope.getOrderHistoryPage = function () {
         var postData = {
             pageNo: $scope.paginationConf.currentPage,
@@ -37,9 +35,7 @@ angular.module('myApp.orderHistory', ['ngRoute','ngResource','tm.pagination'])
     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', $scope.getOrderHistoryPage);
 
     $scope.checkOrder = function(item){
-        $scope.historyInfo.description =item.description;
-        $scope.historyInfo.destCalledName = item.destAddress.calledName;
-        $scope.historyInfo.destPhoneNo = item.destAddress.phoneNo;
+        $scope.$broadcast(BASIC_EVENTS.load,item);
     };
 
     $scope.deleteOrder = function (item){

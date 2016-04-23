@@ -3,9 +3,14 @@
  */
 'use strict';
 //.constant("requestUrl","mockdata/tickeHistory.json")
-angular.module('myApp.orderNearby', ['ngRoute','ngResource'])
-.controller('orderNearbyCtrl', ['$scope','$location','orderService','statusCodeConvertService',
-        function($scope,$location,orderService,statusCodeConvertService) {
+angular.module('myApp.orderNearby', ['ngRoute'])
+.controller('orderNearbyCtrl',
+    ['$scope',
+        '$location',
+        'orderService',
+        'statusCodeConvertService',
+        'BASIC_EVENTS',
+        function($scope,$location,orderService,statusCodeConvertService,BASIC_EVENTS) {
     $scope.orderInfo ={
         description:''
     };
@@ -34,7 +39,7 @@ angular.module('myApp.orderNearby', ['ngRoute','ngResource'])
 
 
     $scope.checkOrder = function(item){
-        $scope.orderInfo.description =item.description;
+        $scope.$broadcast(BASIC_EVENTS.load,item);
     };
 
     $scope.assignOrder = function (item){

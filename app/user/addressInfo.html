@@ -9,7 +9,6 @@
             <th>称呼</th>
             <th>电话号码</th>
             <th>地址</th>
-            <th>百度API</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -18,14 +17,12 @@
             <td>{{address.calledName}}</td>
             <td>{{address.phoneNo}}</td>
             <td>{{address.addressDesc}}</td>
-            <td>{{address.addressData}}</td>
             <td>
                 <button ng-click="modifyAddress(address)" class="btn btn-xs btn-priamry" data-toggle="modal" data-target="#addressDetail">修改</button>
                 <button ng-click="deleteAddress(address)" class="btn btn-xs btn-priamry">删除</button>
             </td>
         </tr>
         <tr ng-show="showAddRow">
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -69,12 +66,6 @@
                                 <input type="text" id="addressDesc" placeholder="" required ng-model="currentAddress.addressDesc">
                             </div>
                         </div>
-                        <div class="control-group">
-                            <label class="control-label" for="addressData">百度API</label>
-                            <div class="controls">
-                                <input type="text" id="addressData" placeholder="" ng-model="currentAddress.addressData"/>
-                            </div>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -90,3 +81,4 @@
     </div>
 
 </div>
+

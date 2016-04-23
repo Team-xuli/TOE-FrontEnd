@@ -45,12 +45,6 @@ services.service('userService', ['$http','urlHeader',function ($http,urlHeader) 
             }
         });
     };
-    this.tryFetchUserInfo = function(){
-        return $http({
-            url: urlHeader + 'user',
-            method: 'GET'
-        });
-    };
     this.fetchUserInfo = function(username,password){
         var localThis = this;
         $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa(username + ':' + password);

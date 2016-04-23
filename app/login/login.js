@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.login', ['ngRoute','myApp.userService'])
+angular.module('myApp.login', ['ngRoute'])
 .controller('loginCtrl', ['$scope','$location','userService','AUTH_EVENTS',function($scope,$location,userService,AUTH_EVENTS) {
       $scope.login = function(loginInfo) {
           var username = loginInfo.username;

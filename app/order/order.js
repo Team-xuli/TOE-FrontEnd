@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.order', ['ngRoute','ngResource'])
+angular.module('myApp.order', ['ngRoute'])
 .controller('orderCtrl', ["$scope","$location","addressService","orderService",function($scope,$location,addressService,orderService) {
     $scope.orgAddresses = null;
     addressService.fetchOrgAddresses()
@@ -24,7 +24,8 @@ angular.module('myApp.order', ['ngRoute','ngResource'])
             calledName:'',
             phoneNo:'',
             addressDesc:'',
-            addressData:''
+            longitude:0,
+            latitude:0
         }
     };
     $scope.addOrder = function(order){
@@ -34,5 +35,5 @@ angular.module('myApp.order', ['ngRoute','ngResource'])
             }).error(function(res){
                 alert("创建失败：" + res.message);
             });
-    }
+    };
 }]);

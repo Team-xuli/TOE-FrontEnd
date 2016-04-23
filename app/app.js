@@ -56,7 +56,7 @@ myApp.config(function ($routeProvider){
         });
 });
 
-myApp.constant('urlHeader','http://192.168.1.2:7777/');
+myApp.constant('urlHeader','http://localhost:7777/');
 myApp.constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
     loginFailed: 'auth-login-failed',
@@ -64,6 +64,10 @@ myApp.constant('AUTH_EVENTS', {
     sessionTimeout: 'auth-session-timeout',
     notAuthenticated: 'auth-not-authenticated',
     notAuthorized: 'auth-not-authorized'
+});
+myApp.constant('BASIC_EVENTS', {
+    load:'basic-load',
+    close:'basic-close'
 });
 
 myApp.controller('indexController',['$scope','$location','AUTH_EVENTS','userService',function($scope,$location,AUTH_EVENTS,userService){
@@ -85,10 +89,6 @@ myApp.controller('indexController',['$scope','$location','AUTH_EVENTS','userServ
         $location.path('/login').replace();
         $scope.onUserChangeHandler();
     };
-    userService.tryFetchUserInfo(function(){
-        $scope.onUserChangeHandler()
-    });
-
 }]);
 
 
