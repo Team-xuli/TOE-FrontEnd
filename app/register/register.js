@@ -17,10 +17,10 @@ angular.module('myApp.register', ['ngRoute'])
                 .success(function() {
                     if (userService.isUserValid()) {
                         if (userService.user.role === 'ROLE_OWNER') {
-                            $location.path('/order').search('username=' + userService.user.username).replace();
+                            $location.path('/order').replace();
                             //if($scope.$$phase) $scope.$apply();
                         } else if (userService.user.role === 'ROLE_DELIVERER') {
-                            $location.path('/deliveryOrder').search('username=' + userService.user.username).replace();
+                            $location.path('/deliveryOrder').replace();
                         }
                         $scope.$emit(AUTH_EVENTS.loginSuccess);
                     }

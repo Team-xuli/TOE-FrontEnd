@@ -4,40 +4,41 @@
 
 'use strict';
 
-angular.module('myApp.addressInfo', ['ngRoute'])
-    .controller('addressInfoCtrl', ['$scope','$location','addressService',function($scope,$location,addressService) {
+angular.module('myApp.addressInfo', ['ngRoute','address.addressDetail'])
+    .controller('addressInfoCtrl', ['$scope','$location','BASIC_EVENTS','addressService',function($scope,$location,BASIC_EVENTS,addressService) {
         //main window
         $scope.addressInfo = [];
         $scope.showAddRow = true;
-        //detail window
-        $scope.currentAddress = null;
-        $scope.saveFunc = null;
 
         $scope.modifyAddress = function(address){
-            $scope.currentAddress = new Object(address) ;
-            $scope.saveFunc = function(){
-                addressService.modifyAddress($scope.currentAddress)
-                    .success(function(){
-                        $scope.reLoad();
-                        alert('修改成功！')
-                    }).error(function(res){
-                        $scope.reLoad();
-                        alert('修改失败:'+ res.message);
-                    });
-            };
+            $scope.$broadcast(BASIC_EVENTS.load,{
+                address:address,
+                saveFunc: function(address){
+                    addressService.modifyAddress(address)
+                        .success(function(){
+                            $scope.reLoad();
+                            alert('修改成功！')
+                        }).error(function(res){
+                            $scope.reLoad();
+                            alert('修改失败:'+ res.message);
+                        });
+                }
+            });
         };
         $scope.addAddress = function(address){
-            $scope.currentAddress = address;
-            $scope.saveFunc = function(){
-                addressService.addAddress($scope.currentAddress)
-                    .success(function(){
-                        $scope.reLoad();
-                        alert('新增成功！')
-                    }).error(function(res){
-                        $scope.reLoad();
-                        alert('新增失败:'+ res.message);
-                    });
-            };
+            $scope.$broadcast(BASIC_EVENTS.load,{
+                address:address,
+                saveFunc: function(address){
+                    addressService.addAddress(address)
+                        .success(function(){
+                            $scope.reLoad();
+                            alert('新增成功！')
+                        }).error(function(res){
+                            $scope.reLoad();
+                            alert('新增失败:'+ res.message);
+                        });
+                }
+            });
         };
         $scope.deleteAddress = function(address){
             addressService.deleteAddress(address)
@@ -48,12 +49,6 @@ angular.module('myApp.addressInfo', ['ngRoute'])
                     $scope.reLoad();
                     alert('删除失败:'+ res.message);
                 });
-        };
-
-        //detail window
-        $scope.calcelFunc = function(){
-            $scope.currentAddress = null;
-            $scope.saveCallBack = null;
         };
 
         //pageload

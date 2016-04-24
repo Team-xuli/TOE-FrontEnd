@@ -27,14 +27,16 @@
                     <label class="control-label">地址:</label>
                     <div class="controls">
                         <input type="text" id="searchKeyInput" value="TOE" required ng-model="addressDetail.addressDesc" placeholder="请输入地址关键字">
+                        <!--<div id="searchResultPanel" style="z-index:99999; border:1px solid #C0C0C0;width:150px;height:auto; display:none"></div>-->
                     </div>
-                    <div id="map" style="height:auto"></div>
-                    <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
                 </div>
+                <!--<div class="control-group">-->
+                    <!--<div id="map" style="height:400px"></div>-->
+                <!--</div>-->
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-success" ng-click="save()" >确定</button>
+            <button class="btn btn-success" ng-click="save()"  >确定</button>
             <button class="btn btn-warning" data-dismiss="modal">取消</button>
         </div>
     </div><!-- /.modal-content -->

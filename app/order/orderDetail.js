@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('order.orderDetail', [])
-.controller('orderCtrl',['$scope','BASIC_EVENTS',function($scope,BASIC_EVENTS){
+.controller('orderDetailCtrl',['$scope','BASIC_EVENTS',function($scope,BASIC_EVENTS){
     $scope.readOnly = true;
     $scope.orderDetail = {
         orderId:0,

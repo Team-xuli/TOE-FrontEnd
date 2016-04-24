@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.order', ['ngRoute'])
-.controller('orderCtrl', ["$scope","$location","addressService","orderService",function($scope,$location,addressService,orderService) {
+.controller('orderCtrl', ['$scope','$location','addressService','orderService',function($scope,$location,addressService,orderService) {
     $scope.orgAddresses = null;
     addressService.fetchOrgAddresses()
         .success(function(res){

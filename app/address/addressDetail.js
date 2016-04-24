@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module("address.addressDetail",[])
-.controller("addressDetailCtrl",['$scope','$modalInstance','BASIC_EVENTS',function($scope,$modalInstance,BASIC_EVENTS){
+.controller("addressDetailCtrl",['$scope','BASIC_EVENTS',function($scope,BASIC_EVENTS){
     $scope.addressDetail = {
         addressId:0,
         calledName:'',
@@ -14,17 +14,13 @@ angular.module("address.addressDetail",[])
         latitude:0
     };
     $scope.save = function(){
-        $scope.$emit(BASIC_EVENTS.close,address)
+        saveCallback(addressDetail);
     };
-
-    $scope.ok = function(){
-        $modalInstance.close($scope.selected.item); //关闭并返回当前选项
-    };
-    $scope.cancel = function(){
-        $modalInstance.dismiss('cancel'); // 退出
-    };
-    $scope.load = function() {
-        // 百度地图API功能
+    $scope.$on(BASIC_EVENTS.load,function(event,initData){
+        $scope.addressDetail = initData.address;
+        $scope.saveCallback = initData.saveFunc;
+    });
+    $scope.loadMap = function() {
         function G(id) {
             return document.getElementById(id);
         }
@@ -76,5 +72,5 @@ angular.module("address.addressDetail",[])
             });
             local.search(myValue);
         }
-    }
+    };
 }]);

@@ -13,7 +13,7 @@ angular.module('myApp.login', ['ngRoute'])
                           $location.path('/order').replace();
                           //if($scope.$$phase) $scope.$apply();
                       } else if (userService.user.username === username && userService.user.role === 'ROLE_DELIVERER') {
-                          $location.path('/deliveryOrder').replace();
+                          $location.path('/orderNearby').replace();
                       }
                       $scope.$emit(AUTH_EVENTS.loginSuccess);
                   }

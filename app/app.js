@@ -35,7 +35,7 @@ myApp.config(function ($routeProvider){
             templateUrl: 'order/order.html',
             controller: 'orderCtrl'
         }).
-        when('/deliveryOrder', {
+        when('/orderNearby', {
             templateUrl: 'order/orderNearby.html',
             controller: 'orderNearbyCtrl'
         }).
